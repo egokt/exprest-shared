@@ -19,5 +19,3 @@ export type SuccessfulActionResponse<FEM_TYPE> = SuccessfulActionResponseType<FE
 export type SuccessfulCollectionResponse<FEM_TYPE> = SuccessfulCollectionResponseType<FEM_TYPE>;
 export type SuccessfulCollectionResponseWithOtherData<FEM_TYPE, OTHER_DATA_TYPE> =
     SuccessfulCollectionResponseWithOtherDataType<FEM_TYPE, OTHER_DATA_TYPE>;
-
-export const dummy = null;
