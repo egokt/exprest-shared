@@ -1,6 +1,6 @@
 {
-  "name": "@egokt/exprest-shared",
-  "version": "0.0.1",
+  "name": "exprest-shared",
+  "version": "0.0.2",
   "description": "Code and types shared between exprest-server and exprest-web-client.",
   "main": "exprest-shared.js",
   "types": "exprest-shared.d.ts",
@@ -8,8 +8,8 @@
     "build-prod": "webpack --mode production",
     "build": "webpack --mode development",
     "build-watch": "webpack --mode development --watch",
-    "clean": "rm -rf build",
-    "publish-npm": "if [ -f webpack.config.cjs ]; then cd dist; fi && npm publish --access public && if [ -f webpack.config.cjs ]; then cd ..; fi",
+    "clean": "rm -rf build dist",
+    "publish-npm": "npm run build-prod && if [ -f webpack.config.cjs ]; then cd dist; fi && npm publish --access public && if [ -f webpack.config.cjs ]; then cd ..; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Erek Gokturk",
