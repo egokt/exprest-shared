@@ -1,6 +1,6 @@
 {
   "name": "exprest-shared",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Code and types shared between exprest-server and exprest-web-client.",
   "main": "exprest-shared.js",
   "types": "exprest-shared.d.ts",
