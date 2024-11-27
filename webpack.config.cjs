@@ -3,7 +3,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 const TypescriptDeclarationPlugin = require('typescript-declaration-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/exprest-shared.ts',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'exprest-shared.js',
@@ -34,7 +34,7 @@ module.exports = {
     ],
     plugins: [
         new TypescriptDeclarationPlugin({
-            removeMergedDeclarations: true,
+            removeMergedDeclarations: false,
             out:'./exprest-shared.d.ts',
         }),
         new CopyPlugin({
