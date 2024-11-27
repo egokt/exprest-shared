@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Router } from "express";
 
 export type ApiResponse<T> = {status?: number, isOk: boolean, data?: T};
 
@@ -27,7 +27,32 @@ export type FetchFromApiWithAuth<T> = (
     options?: RequestInit,
 ) => Promise<ApiResponse<T>>;
 
-export type PostRequestBuilder = (props: {url: string, data?: any, queryParams?: Object}) => Request;
+export type GetCollectionRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type GetCollectionRequestBuilder = (props: GetCollectionRequestBuilderProps) => Request;
+
+export type GetSingletonRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type GetSingletonRequestBuilder = (props: GetSingletonRequestBuilderProps) => Request;
+
+export type CreateRequestBuilderProps = {resourceUrl: string, data: any, queryParams?: Object};
+export type CreateRequestBuilder = (props: CreateRequestBuilderProps) => Request;
+
+export type UpdateSingletonRequestBuilderProps = {resourceUrl: string, data: any, queryParams?: Object};
+export type UpdateSingletonRequestBuilder = (props: UpdateSingletonRequestBuilderProps) => Request;
+
+export type GetEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, queryParams?: Object};
+export type GetEntityRequestBuilder = <ID = number>(props: GetEntityRequestBuilderProps<ID>) => Request;
+
+export type UpdateEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, data: any, queryParams?: Object};
+export type UpdateEntityRequestBuilder = <ID = number>(props: UpdateEntityRequestBuilderProps<ID>) => Request;
+
+export type DeleteEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, queryParams?: Object};
+export type DeleteEntityRequestBuilder = <ID = number>(props: DeleteEntityRequestBuilderProps<ID>) => Request;
+
+export type DeleteSingletonRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type DeleteSingletonRequestBuilder = (props: DeleteSingletonRequestBuilderProps) => Request;
+
+export type ActionRequestBuilderProps = {url: string, data?: any, queryParams?: Object};
+export type ActionRequestBuilder = (props: ActionRequestBuilderProps) => Request;
 
 export type CreateContextWithAuthFunction<USER, CONTEXT> = (param0: {user: USER}) => CONTEXT | Promise<CONTEXT>;
 export type CreateContextWoAuthFunction<CONTEXT> = (param0: {}) => CONTEXT | Promise<CONTEXT>;
@@ -801,7 +826,7 @@ export type GetSingletonWithAuthRequestHandlerFactoryProps<
         PostExecutionFunctionWithUserWithEntity<USER, ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, CONTEXT>,
 };
  
-export type GetSingletonWithAuth<
+export type GetSingletonWithAuthRequestHandlerFactory<
     USER,
     ENTITY extends Object,
     FRONT_END_ENTITY extends Object,
@@ -969,3 +994,99 @@ export type UpdateSingletonWithAuthRequestHandlerFactory<
         USER, ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT, OTHER_DATA>
 ) => EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>;
  
+export type AddActionRouteFunction<QUERY_PARAMS, RESPONSE_BODY> = (
+    router: Router,
+    path: string,
+    requestHandler: ActionRequestHandlerFunction<RESPONSE_BODY, QUERY_PARAMS>,
+) => void;
+
+export type AddCreateRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddDeleteEntityRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    idParamName: string,
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddDeleteSingletonRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddGetCollectionRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    router: Router,
+    path: string,
+    requestHandler: GetCollectionRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddGetEntityRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    idParamName: string,
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddGetSingletonRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddUpdateEntityRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    idParamName: string,
+    router: import('express').Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
+
+export type AddUpdateSingletonRouteFunction<
+    ENTITY extends Object,
+    FRONT_END_ENTITY extends Object,
+    SANITIZED_PARAMS extends {[key: string]: string},
+    OTHER_DATA extends Object | null = null,
+> = (
+    router: Router,
+    path: string,
+    requestHandler: EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>,
+) => void;
