@@ -1,25 +1,22 @@
 {
   "name": "exprest-shared",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Code and types shared between exprest-server and exprest-web-client.",
   "main": "exprest-shared.js",
+  "type": "module",
   "types": "exprest-shared.d.ts",
   "scripts": {
-    "build-prod": "webpack --mode production",
-    "build": "webpack --mode development",
-    "build-watch": "webpack --mode development --watch",
+    "build": "tsc",
+    "build-npm": "npm run build && cp package.json LICENSE.md README.md build",
+    "build-watch": "tsc -w",
+    "publish-npm": "npm run build-npm && cd build && npm publish --access public && cd -",
     "clean": "rm -rf build dist",
-    "publish-npm": "npm run build-prod && if [ -f webpack.config.cjs ]; then cd dist; fi && npm publish --access public && if [ -f webpack.config.cjs ]; then cd ..; fi",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Erek Gokturk",
   "license": "ISC",
   "devDependencies": {
-    "copy-webpack-plugin": "^12.0.2",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.6.3",
-    "typescript-declaration-webpack-plugin": "^0.3.0",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
+    "@types/express": "^5.0.0",
+    "typescript": "^5.6.3"
   }
 }
