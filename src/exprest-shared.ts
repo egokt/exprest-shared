@@ -32,7 +32,8 @@ export type GetCollectionRequestBuilderProps =
     {resourceUrl: string, queryParams?: Object, headers?: {[key: string]: string}};
 export type GetCollectionRequestBuilder = (props: GetCollectionRequestBuilderProps) => Request;
 
-export type GetSingletonRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type GetSingletonRequestBuilderProps =
+    {resourceUrl: string, queryParams?: Object, headers?: {[key: string]: string}};
 export type GetSingletonRequestBuilder = (props: GetSingletonRequestBuilderProps) => Request;
 
 export type CreateRequestBuilderProps =
