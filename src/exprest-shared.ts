@@ -28,31 +28,38 @@ export type FetchFromApiWithAuth<T> = (
     options?: RequestInit,
 ) => Promise<ApiResponse<T>>;
 
-export type GetCollectionRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type GetCollectionRequestBuilderProps =
+    {resourceUrl: string, queryParams?: Object, headers?: {[key: string]: string}};
 export type GetCollectionRequestBuilder = (props: GetCollectionRequestBuilderProps) => Request;
 
 export type GetSingletonRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
 export type GetSingletonRequestBuilder = (props: GetSingletonRequestBuilderProps) => Request;
 
-export type CreateRequestBuilderProps = {resourceUrl: string, data: any, queryParams?: Object};
+export type CreateRequestBuilderProps =
+    {resourceUrl: string, data: any, queryParams?: Object, headers?: {[key: string]: string}};
 export type CreateRequestBuilder = (props: CreateRequestBuilderProps) => Request;
 
-export type UpdateSingletonRequestBuilderProps = {resourceUrl: string, data: any, queryParams?: Object};
+export type UpdateSingletonRequestBuilderProps =
+    {resourceUrl: string, data: any, queryParams?: Object, headers?: {[key: string]: string}};
 export type UpdateSingletonRequestBuilder = (props: UpdateSingletonRequestBuilderProps) => Request;
 
-export type GetEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, queryParams?: Object};
+export type GetEntityRequestBuilderProps<ID> =
+    {collectionUrl: string, id: ID, queryParams?: Object, headers?: {[key: string]: string}};
 export type GetEntityRequestBuilder = <ID = number>(props: GetEntityRequestBuilderProps<ID>) => Request;
 
-export type UpdateEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, data: any, queryParams?: Object};
+export type UpdateEntityRequestBuilderProps<ID> =
+    {collectionUrl: string, id: ID, data: any, queryParams?: Object, headers?: {[key: string]: string}};
 export type UpdateEntityRequestBuilder = <ID = number>(props: UpdateEntityRequestBuilderProps<ID>) => Request;
 
-export type DeleteEntityRequestBuilderProps<ID> = {collectionUrl: string, id: ID, queryParams?: Object};
+export type DeleteEntityRequestBuilderProps<ID> =
+    {collectionUrl: string, id: ID, queryParams?: Object, headers?: {[key: string]: string}};
 export type DeleteEntityRequestBuilder = <ID = number>(props: DeleteEntityRequestBuilderProps<ID>) => Request;
 
-export type DeleteSingletonRequestBuilderProps = {resourceUrl: string, queryParams?: Object};
+export type DeleteSingletonRequestBuilderProps =
+    {resourceUrl: string, queryParams?: Object, headers?: {[key: string]: string}};
 export type DeleteSingletonRequestBuilder = (props: DeleteSingletonRequestBuilderProps) => Request;
 
-export type ActionRequestBuilderProps = {url: string, data?: any, queryParams?: Object};
+export type ActionRequestBuilderProps = {url: string, data?: any, queryParams?: Object, headers?: {[key: string]: string}};
 export type ActionRequestBuilder = (props: ActionRequestBuilderProps) => Request;
 
 export type CreateContextWithAuthFunction<USER, CONTEXT> = (param0: {user: USER}) => CONTEXT | Promise<CONTEXT>;
