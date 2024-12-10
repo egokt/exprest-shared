@@ -22,6 +22,7 @@ export type ErrorResponse = { errors: Array<string>; };
 
 export type SetLoggedOutFunction = () => void;
 
+export type FetchFromApi<T> = (request: Request, options?: RequestInit) => Promise<ApiResponse<T>>;
 export type FetchFromApiWithAuth<T> = (
     setLoggedOutFunction: SetLoggedOutFunction,
     request: Request,
