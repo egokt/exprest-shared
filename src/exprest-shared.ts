@@ -1,4 +1,5 @@
 import express, { Router } from "express";
+import * as expressCore from 'express-serve-static-core';
 import { IncomingHttpHeaders } from "http";
 
 export type ApiResponse<T> = {status?: number, isOk: boolean, data?: T};
@@ -94,9 +95,9 @@ export type SanitizeHeadersWithAuthWithIdFunction<ID, USER, CONTEXT, SANITIZED_H
         => SanitizeFunctionReturnType<SANITIZED_HEADERS>;
 
 type SanitizeParamsWoAuthFunctionProps<CONTEXT, SANITIZED_HEADERS> = {
-    unsanitizedParams: {[key in string]?: string},
-    headers: SANITIZED_HEADERS,
-    context: CONTEXT
+    unsanitizedParams: any;
+    headers: SANITIZED_HEADERS;
+    context: CONTEXT;
 };
 export type SanitizeParamsWoAuthFunction<CONTEXT, SANITIZED_HEADERS, SANITIZED_PARAMS> =
     (param0: SanitizeParamsWoAuthFunctionProps<CONTEXT, SANITIZED_HEADERS>)
@@ -307,7 +308,7 @@ export type EntityReturningRequestHandlerFunction<
     OTHER_DATA extends Object | null = null
 > =
     (
-        req: express.Request<{[key in keyof SANITIZED_PARAMS]?: string}>,
+        req: express.Request<expressCore.ParamsDictionary, any, {[key in keyof SANITIZED_PARAMS]?: any}>,
         res: EntityReturningExpressResponseType<ENTITY, FRONT_END_ENTITY, OTHER_DATA>
     ) => Promise<void>;
 
@@ -324,7 +325,7 @@ export type GetCollectionRequestHandlerFunction<
     OTHER_DATA extends Object | null = null
 > =
     (
-        req: express.Request<{[key in keyof SANITIZED_PARAMS]?: string}>,
+        req: express.Request<expressCore.ParamsDictionary, any, {[key in keyof SANITIZED_PARAMS]?: any}>,
         res: CollectionReturningExpressResponseType<ENTITY, FRONT_END_ENTITY, OTHER_DATA>
     ) => Promise<void>;
 
@@ -404,7 +405,7 @@ type ActionFunctionWoAuthProps<SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BO
     headers: SANITIZED_HEADERS,
     params: SANITIZED_PARAMS,
     body: SANITIZED_BODY,
-    rawExpressRequest: express.Request<{[key in keyof SANITIZED_PARAMS]?: string}>,
+    rawExpressRequest: express.Request<expressCore.ParamsDictionary, any, {[key in keyof SANITIZED_PARAMS]?: any}>;
 };
 type ActionFunctionWithAuthProps<USER, SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT> =
     ActionFunctionWoAuthProps<SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT> & { user: USER, };
@@ -426,7 +427,7 @@ export type ActionFunctionWoAuth<ACTION_RESPONSE_CONTENT, SANITIZED_HEADERS, SAN
 
 export type ActionRequestHandlerFunction<ACTION_RESPONSE_CONTENT, SANITIZED_PARAMS> =
     (
-        req: express.Request<{[key in keyof SANITIZED_PARAMS]?: string}>,
+        req: express.Request<expressCore.ParamsDictionary, any, {[key in keyof SANITIZED_PARAMS]?: any}>,
         res: express.Response<
             ACTION_RESPONSE_CONTENT extends null ? null : SuccessfulActionResponse<ACTION_RESPONSE_CONTENT>
         >
