@@ -1027,7 +1027,7 @@ export type UpdateEntityWithAuthRequestHandlerFactory<
     ID = number,
 > = (
     props: UpdateEntityWithAuthRequestHandlerFactoryProps<
-        USER, ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, SANITIZED_HEADERS, SANITIZED_BODY, CONTEXT, OTHER_DATA, ID>
+        USER, ENTITY, FRONT_END_ENTITY, SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT, OTHER_DATA, ID>
 ) => EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>;
 
 export type UpdateSingletonWoAuthRequestHandlerFactoryProps<
@@ -1066,7 +1066,7 @@ export type UpdateSingletonWoAuthRequestHandlerFactory<
     OTHER_DATA extends Object | null = null
 > = (
     props: UpdateSingletonWoAuthRequestHandlerFactoryProps<
-        ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, SANITIZED_HEADERS, SANITIZED_BODY, CONTEXT, OTHER_DATA>
+        ENTITY, FRONT_END_ENTITY, SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT, OTHER_DATA>
 ) => EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>;
 
 export type UpdateSingletonWithAuthRequestHandlerFactoryProps<
@@ -1106,7 +1106,7 @@ export type UpdateSingletonWithAuthRequestHandlerFactory<
     OTHER_DATA extends Object | null = null
 > = (
     props: UpdateSingletonWithAuthRequestHandlerFactoryProps<
-        USER, ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, SANITIZED_HEADERS, SANITIZED_BODY, CONTEXT, OTHER_DATA>
+        USER, ENTITY, FRONT_END_ENTITY, SANITIZED_HEADERS, SANITIZED_PARAMS, SANITIZED_BODY, CONTEXT, OTHER_DATA>
 ) => EntityReturningRequestHandlerFunction<ENTITY, FRONT_END_ENTITY, SANITIZED_PARAMS, OTHER_DATA>;
  
 export type AddActionRouteFunction<QUERY_PARAMS, RESPONSE_BODY> = (
