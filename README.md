@@ -1,6 +1,6 @@
 # Exprest - Shared Code Between Client and Server
 
-This package containes the shared code and types between the
+This package contains the shared code and types between the
 [exprest-server](https://github.com/egokt/exprest-server)
 and [exprest-web-client](https://github.com/egokt/exprest-web-client) packages.
 See their documentation for information about exprest.
